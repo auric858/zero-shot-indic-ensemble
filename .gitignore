@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+#large files 
+outputs/models/
+
+# throwaway test runs
+outputs/predictions/smoke_*
+.cache/
+*.docx
+*.pdf
+*.pptx

@@ -1,0 +1,7 @@
+model,saw_santali,eng_tok_per_word,santali_tok_per_word,santali_unk_%,santali_fragmentation_x,bengali_tok_per_word,bengali_unk_%,bengali_fragmentation_x
+mbert,No,1.3,1.12,94.04,0.86,2.78,3.04,2.14
+xlmr_base,No,1.38,2.08,48.77,1.5,2.16,0.01,1.57
+xlmr_large,No,1.38,2.08,48.77,1.5,2.16,0.01,1.57
+muril,No,1.24,1.12,93.98,0.9,1.41,0.02,1.14
+glot500,Uncertain,1.31,2.13,0.0,1.63,2.0,0.0,1.53
+indicbert_v2,Yes,1.22,2.24,0.0,1.83,1.41,0.0,1.15

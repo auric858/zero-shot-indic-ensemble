@@ -1,0 +1,10 @@
+transformers>=4.44,<5
+datasets>=2.19,<4.0
+accelerate>=0.33
+scikit-learn>=1.4
+statsmodels>=0.14
+pandas>=2.0
+numpy>=1.26
+sentencepiece
+protobuf
+tqdm
