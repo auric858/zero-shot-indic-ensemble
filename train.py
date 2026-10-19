@@ -1,4 +1,4 @@
-"""Fine-tune ONE model on English only, then evaluate zero-shot on Santali and Bengali.
+"""Fine-tuning one model on english only, then evaluate zero-shot on Santali and Bengali.
 Saves softmax probabilities to outputs/predictions/{model}_seed{seed}.npz"""
 import argparse
 import gc
@@ -38,17 +38,17 @@ def train_one(name, seed, epochs=None, tag="", save_model=False):
     device = get_device()
     t0 = time.time()
 
-    # ---- data: English only for training and model selection
+    # data: English only for training and model selection
     (train_x, train_y, _), (val_x, val_y, _) = load_english()
     tests = {lang: load_test(lang) for lang in TEST_LANGS}
 
-    # ---- model
+    # building the model
     tok, model = build(name)
     if cfg.get("freeze_embeddings"):
         model.base_model.embeddings.word_embeddings.requires_grad_(False)
     model.to(device)
 
-    # ---- optimizer: AdamW, no weight decay on biases / LayerNorm
+    # optimizer: AdamW, no weight decay on biases/LayerNorm
     no_decay = ("bias", "LayerNorm.weight")
     trainable = [(n, p) for n, p in model.named_parameters() if p.requires_grad]
     groups = [
@@ -66,7 +66,7 @@ def train_one(name, seed, epochs=None, tag="", save_model=False):
         optimizer, int(cfg["warmup_ratio"] * total_steps), total_steps)
     use_amp = device.type == "cuda"
 
-    # ---- training loop
+    # training loop
     best_f1, best_state = -1.0, None
     for epoch in range(1, cfg["epochs"] + 1):
         model.train()
@@ -88,7 +88,7 @@ def train_one(name, seed, epochs=None, tag="", save_model=False):
                 optimizer.zero_grad()
             bar.set_postfix(loss=f"{loss.item() * cfg['grad_accum']:.3f}")
 
-        # model selection uses ENGLISH validation only
+        # model selection uses english validation only
         val_probs = predict_probs(model, tok, val_x, device, cfg["max_len"])
         val_f1 = metrics(val_y, val_probs.argmax(1))["macro_f1"]
         print(f"  epoch {epoch}: English val macro-F1 = {val_f1:.4f}")
@@ -96,7 +96,7 @@ def train_one(name, seed, epochs=None, tag="", save_model=False):
             best_f1 = val_f1
             best_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
 
-    # ---- restore the best English checkpoint, then run zero-shot tests ONCE
+    #restores the best English checkpoint,then runs zero-shot tests once
     model.load_state_dict(best_state)
     val_probs = predict_probs(model, tok, val_x, device, cfg["max_len"])
     saved = {"val_probs": val_probs, "val_labels": np.array(val_y), "val_f1": best_f1}
