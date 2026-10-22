@@ -1,12 +1,27 @@
 __pycache__/
 *.pyc
 .venv/
-#large files 
+.vscode/
+.ipynb_checkpoints/
+.pytest_cache/
+.env
+*.log
+.DS_Store
+Thumbs.db
+
+# large files
 outputs/models/
+models/
+*.safetensors
+*.bin
+*.pt
+*.ckpt
 
 # throwaway test runs
 outputs/predictions/smoke_*
 .cache/
+
+# documents (not part of the repo)
 *.docx
 *.pdf
 *.pptx

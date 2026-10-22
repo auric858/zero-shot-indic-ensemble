@@ -1,0 +1,4 @@
+seed,best_single,best_ensemble,only_single_correct,only_ensemble_correct,p_value
+42,indicbert_v2,hard_vote,82,9,0.0
+43,indicbert_v2,hard_vote,94,20,0.0
+44,indicbert_v2,hard_vote,86,8,0.0
