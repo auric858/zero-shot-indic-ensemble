@@ -8,3 +8,5 @@ numpy>=1.26
 sentencepiece
 protobuf
 tqdm
+huggingface-hub>=0.34,<1.0
+

@@ -112,19 +112,24 @@ def run_language(lang, seed_data, majority_class):
     print("\nPer-class F1 (mean over seeds):")
     print(pc.loc[[best_single, best_ens]])
 
-    # ---- McNemar: best single vs best ensemble, one test per seed
+    
+  # ---- McNemar: best ensemble vs best single (by F1 and by accuracy), per seed
+    singles = agg[agg["type"] == "single"]
+    best_single_acc = singles["acc_mean"].idxmax()
+    candidates = list(dict.fromkeys([best_single, best_single_acc]))
     mc_rows = []
-    for s in seeds:
-        a = preds_by_seed[s][best_single] == y     # single model correct?
-        b = preds_by_seed[s][best_ens] == y        # ensemble correct?
-        only_single = int(np.sum(a & ~b))
-        only_ens = int(np.sum(~a & b))
-        table = [[int(np.sum(a & b)), only_single],
-                 [only_ens, int(np.sum(~a & ~b))]]
-        p = mcnemar(table, exact=True).pvalue
-        mc_rows.append({"seed": s, "best_single": best_single, "best_ensemble": best_ens,
-                        "only_single_correct": only_single,
-                        "only_ensemble_correct": only_ens, "p_value": round(p, 4)})
+    for single in candidates:
+        for s in seeds:
+            a = preds_by_seed[s][single] == y # single model correct?
+            b = preds_by_seed[s][best_ens] == y # ensemble correct?
+            only_single = int(np.sum(a & ~b))
+            only_ens = int(np.sum(~a & b))
+            table = [[int(np.sum(a & b)), only_single],
+                     [only_ens, int(np.sum(~a & ~b))]]
+            p = mcnemar(table, exact=True).pvalue
+            mc_rows.append({"seed": s, "single": single, "best_ensemble": best_ens,
+                            "only_single_correct": only_single,
+                            "only_ensemble_correct": only_ens, "p_value": round(p, 4)})
     mc = pd.DataFrame(mc_rows)
     mc.to_csv(TABLE_DIR / f"mcnemar_{lang}.csv", index=False)
     print("\nMcNemar exact test (best single vs best ensemble):")

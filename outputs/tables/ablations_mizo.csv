@@ -1,0 +1,25 @@
+config,ensemble,accuracy,macro_f1
+all_six,hard_vote,0.621,0.607
+all_six,soft_vote,0.621,0.606
+all_six,weighted_soft_vote,0.621,0.606
+leave_out_glot500,hard_vote,0.585,0.574
+leave_out_glot500,soft_vote,0.582,0.57
+leave_out_glot500,weighted_soft_vote,0.583,0.57
+leave_out_indicbert_v2,hard_vote,0.621,0.611
+leave_out_indicbert_v2,soft_vote,0.623,0.604
+leave_out_indicbert_v2,weighted_soft_vote,0.623,0.605
+leave_out_mbert,hard_vote,0.645,0.608
+leave_out_mbert,soft_vote,0.647,0.598
+leave_out_mbert,weighted_soft_vote,0.647,0.598
+leave_out_muril,hard_vote,0.634,0.617
+leave_out_muril,soft_vote,0.616,0.6
+leave_out_muril,weighted_soft_vote,0.619,0.603
+leave_out_xlmr_base,hard_vote,0.601,0.575
+leave_out_xlmr_base,soft_vote,0.606,0.579
+leave_out_xlmr_base,weighted_soft_vote,0.608,0.581
+leave_out_xlmr_large,hard_vote,0.587,0.566
+leave_out_xlmr_large,soft_vote,0.577,0.559
+leave_out_xlmr_large,weighted_soft_vote,0.578,0.561
+readable_only: glot500+indicbert_v2,hard_vote,0.616,0.568
+readable_only: glot500+indicbert_v2,soft_vote,0.621,0.564
+readable_only: glot500+indicbert_v2,weighted_soft_vote,0.623,0.565

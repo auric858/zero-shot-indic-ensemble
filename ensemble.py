@@ -1,6 +1,6 @@
-"""Hard, soft and weighted soft voting.
+"""Hard, soft and weighted soft voting implementation...
 
-Every function takes `probs` with shape (M models, N sentences, C classes)
+Every function takes probs with shape (M models, N sentences, C classes)
 and returns either predicted class ids (N,) or averaged probabilities (N, C).
 """
 import numpy as np
@@ -14,7 +14,7 @@ def _check(probs):
 
 
 def hard_vote(probs):
-    """Majority vote of each model's top class. Ties are broken by confidence."""
+    ## Majority vote of each model's top class.Ties here are broken by confidence.
     probs = _check(probs)
     M, N, C = probs.shape
     preds = probs.argmax(axis=2)                 # (M, N): each model's chosen class
@@ -31,7 +31,7 @@ def hard_vote(probs):
 
 
 def soft_vote_probs(probs):
-    """Average the probability vectors of all models."""
+    ## averages the probability vectors of all models.
     return _check(probs).mean(axis=0)
 
 
@@ -40,7 +40,7 @@ def soft_vote(probs):
 
 
 def normalize_weights(weights, n_models):
-    """Validate weights and rescale them to sum to 1."""
+    """Validating weights and rescale them to sum to 1."""
     w = np.asarray(weights, dtype=float)
     if w.shape != (n_models,):
         raise ValueError("need exactly one weight per model")
@@ -60,7 +60,7 @@ def weighted_soft_vote(probs, weights):
 
 
 if __name__ == "__main__":
-    # Quick preview on your real saved predictions (seed 42 only)
+    
     from config import MODELS, PRED_DIR
     from evaluate import metrics
 

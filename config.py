@@ -19,6 +19,8 @@ TRAIN_LANG = "eng_Latn"          # train + validation will use English only
 TEST_LANGS = {
     "santali": "sat_Olck",       # Ol Chiki script, unseen by most models (hard case)
     "bengali": "ben_Beng",       # seen by all six models (easy control case)
+    "mizo":    "lus_Latn",       # Latin script, language mostly unseen
+    "meitei":  "mni_Beng",       # Bengali script, language mostly unseen
 }
 
 LABELS = ["science/technology", "travel", "politics", "sports",

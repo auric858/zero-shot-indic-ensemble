@@ -1,0 +1,11 @@
+system,type,acc_mean,acc_std,f1_mean,f1_std
+glot500,single,0.681,0.034,0.65,0.042
+hard_vote,ensemble,0.621,0.024,0.607,0.031
+weighted_soft_vote,ensemble,0.621,0.01,0.606,0.02
+soft_vote,ensemble,0.621,0.01,0.606,0.02
+xlmr_base,single,0.59,0.048,0.555,0.066
+mbert,single,0.507,0.02,0.505,0.027
+xlmr_large,single,0.521,0.032,0.502,0.044
+muril,single,0.453,0.075,0.383,0.103
+indicbert_v2,single,0.426,0.069,0.357,0.079
+majority_class,baseline,0.25,0.0,0.057,0.0

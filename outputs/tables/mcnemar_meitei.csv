@@ -1,0 +1,7 @@
+seed,single,best_ensemble,only_single_correct,only_ensemble_correct,p_value
+42,xlmr_large,hard_vote,29,25,0.6835
+43,xlmr_large,hard_vote,13,22,0.1755
+44,xlmr_large,hard_vote,21,48,0.0016
+42,indicbert_v2,hard_vote,34,20,0.0759
+43,indicbert_v2,hard_vote,17,26,0.2221
+44,indicbert_v2,hard_vote,10,12,0.8318

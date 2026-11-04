@@ -1,0 +1,4 @@
+seed,single,best_ensemble,only_single_correct,only_ensemble_correct,p_value
+42,glot500,hard_vote,23,19,0.644
+43,glot500,hard_vote,28,10,0.0051
+44,glot500,hard_vote,26,11,0.0201
