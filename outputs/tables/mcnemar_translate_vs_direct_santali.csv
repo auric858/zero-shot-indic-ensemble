@@ -1,0 +1,7 @@
+direct_model,seed,direct_accuracy,only_translate_correct,only_direct_correct,p_value
+indicbert_v2,42,0.662,36,28,0.3817
+indicbert_v2,43,0.618,43,26,0.0533
+indicbert_v2,44,0.637,37,24,0.1237
+glot500,42,0.525,58,22,0.0001
+glot500,43,0.515,57,19,0.0
+glot500,44,0.525,54,18,0.0
