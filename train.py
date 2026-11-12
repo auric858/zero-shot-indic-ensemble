@@ -111,7 +111,7 @@ def train_one(name, seed, epochs=None, tag="", save_model=False):
     print(summary + f" | {time.time() - t0:.0f}s")
 
     np.savez(out_path, **saved)
-    if save_model and not tag:
+    if save_model:
         model.save_pretrained(MODEL_DIR / name)
         tok.save_pretrained(MODEL_DIR / name)
 
@@ -127,13 +127,16 @@ if __name__ == "__main__":
     ap.add_argument("--epochs", type=int, default=None)
     ap.add_argument("--smoke", action="store_true",
                     help="1 epoch, saved under a 'smoke_' prefix (does not block real runs)")
+    ap.add_argument("--export", action="store_true",
+                    help="retrain and save checkpoints for serving; predictions go to "
+                         "outputs/predictions/export_* so the real results are untouched")
     ap.add_argument("--save-model", nargs="*", default=["xlmr_base"],
                     help="models whose first-seed checkpoint is kept (used by Mundari step)")
     args = ap.parse_args()
 
     for m in args.models:
         for i, s in enumerate(args.seeds):
-            train_one(m, s,
-                      epochs=1 if args.smoke else args.epochs,
-                      tag="smoke_" if args.smoke else "",
-                      save_model=(m in args.save_model and i == 0))
+            tag = "smoke_" if args.smoke else ("export_" if args.export else "")
+            keep = (not args.smoke) and (args.export or (m in args.save_model and i == 0))
+            train_one(m, s, epochs=1 if args.smoke else args.epochs, tag=tag, save_model=keep)
+            

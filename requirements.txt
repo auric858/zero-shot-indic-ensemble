@@ -9,4 +9,7 @@ sentencepiece
 protobuf
 tqdm
 huggingface-hub>=0.34,<1.0
-
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2
+matplotlib
